@@ -14,8 +14,14 @@
         socket.on('nueva-notificacion', (data) => {
             const div = document.getElementById('notificaciones');
             const p = document.createElement('p');
-            p.textContent = "🟢 Notificación recibida: " + data.mensaje.NombreNegocio;
+            p.textContent = "🟢 Notificación recibida de: " + data.mensaje.NombreNegocio;
+            const direccion = document.createElement('p');
+            direccion.textContent = "Direccion :" + data.mensaje.Direccion;
+            const coordenadas = document.createElement('p');
+            coordenadas.textContent = "https://www.google.com/maps/search/?api=1&query="+ data.mensaje.Direccion[0]+ "%2C"+data.mensaje.Direccion[1]+"&hl=es-419"
             div.appendChild(p);
+            div.appendChild(direccion);
+            div.appendChild(coordenadas);
         });
     </script>
 </body>
