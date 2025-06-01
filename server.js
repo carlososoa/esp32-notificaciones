@@ -28,7 +28,7 @@ app.post('/api/notificar', (req, res) => {
 
     // Emitir a todos los clientes conectados vía WebSocket
     const FechaHora = new Date().toISOString()
-    io.emit('nueva-notificacion', { NombreNegocio, Direccion, Coordenadas, FechaHora });
+    io.emit('nueva-notificacion', {mensaje :{ NombreNegocio, Direccion, Coordenadas, FechaHora }});
 
     res.status(200).json({ ok: true, mensaje: "Notificación enviada a clientes" });
 });
