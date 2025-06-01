@@ -2,25 +2,29 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
+const morgan = require('morgan'); // 🆕 Agregado para logs HTTP
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
+// Middleware
+app.use(morgan('dev')); // 🆕 Loguea cada solicitud HTTP en consola
 app.use(express.json()); // Para leer JSON del ESP32
 
-// Servimos el archivo index.html
+// Página web
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Ruta para recibir notificaciones del ESP32
+// API para recibir notificaciones
 app.post('/api/notificar', (req, res) => {
     const mensaje = req.body.mensaje || 'Mensaje sin contenido';
 
     console.log("🔔 Notificación del ESP32:", mensaje);
+    console.log("📦 Body completo:", req.body);
 
-    // Enviar a todos los clientes conectados
+    // Emitir a todos los clientes conectados vía WebSocket
     io.emit('nueva-notificacion', { mensaje });
 
     res.status(200).json({ ok: true, mensaje: "Notificación enviada a clientes" });
