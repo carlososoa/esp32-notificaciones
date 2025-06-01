@@ -23,7 +23,7 @@ app.post('/api/notificar', (req, res) => {
     const Direccion = req.body.Direccion || 'Mensaje sin contenido';
     const Coordenadas = req.body.Coordenadas || 'Mensaje sin contenido';
 
-    console.log("🔔 Notificación del ESP32:", mensaje);
+    //console.log("🔔 Notificación del ESP32:", mensaje);
     console.log("📦 Body completo:", req.body);
 
     // Emitir a todos los clientes conectados vía WebSocket
