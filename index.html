@@ -14,7 +14,7 @@
         socket.on('nueva-notificacion', (data) => {
             const div = document.getElementById('notificaciones');
             const p = document.createElement('p');
-            p.textContent = "🟢 Notificación recibida: " + data.NombreNegocio;
+            p.textContent = "🟢 Notificación recibida: " + data.mensaje.NombreNegocio;
             div.appendChild(p);
         });
     </script>
