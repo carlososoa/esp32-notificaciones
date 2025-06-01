@@ -12,6 +12,9 @@ const io = socketIo(server);
 app.use(morgan('dev')); // 🆕 Loguea cada solicitud HTTP en consola
 app.use(express.json()); // Para leer JSON del ESP32
 
+// Sirve archivos estáticos desde la raíz
+app.use(express.static(__dirname));
+
 // Página web
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));

@@ -34,10 +34,21 @@
         </div>
     </div>
 
+
+
+    <audio id="sonido-alerta" src="siren-wail-ringtone.mp3" preload="auto"></audio>
+
     <script>
         const socket = io();
 
         socket.on('nueva-notificacion', (data) => {
+
+
+            // ▶️ Reproducir sonido
+            const sonido = document.getElementById('sonido-alerta');
+            sonido.currentTime = 0; // Reinicia por si se activa muchas veces rápido
+            sonido.play();
+            
             const container = document.getElementById('notificaciones');
 
             // Formatear fecha
