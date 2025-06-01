@@ -19,13 +19,16 @@ app.get('/', (req, res) => {
 
 // API para recibir notificaciones
 app.post('/api/notificar', (req, res) => {
-    const mensaje = req.body || 'Mensaje sin contenido';
+    const NombreNegocio = req.body.NombreNegocio || 'Mensaje sin contenido';
+    const Direccion = req.body.Direccion || 'Mensaje sin contenido';
+    const Coordenadas = req.body.Coordenadas || 'Mensaje sin contenido';
 
     console.log("🔔 Notificación del ESP32:", mensaje);
     console.log("📦 Body completo:", req.body);
 
     // Emitir a todos los clientes conectados vía WebSocket
-    io.emit('nueva-notificacion', { mensaje });
+    const FechaHora = new Date().toISOString()
+    io.emit('nueva-notificacion', { NombreNegocio, Direccion, Coordenadas, FechaHora });
 
     res.status(200).json({ ok: true, mensaje: "Notificación enviada a clientes" });
 });
