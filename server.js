@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 // API para recibir notificaciones
 app.post('/api/notificar', (req, res) => {
-    const mensaje = req.body.mensaje || 'Mensaje sin contenido';
+    const mensaje = req.body || 'Mensaje sin contenido';
 
     console.log("🔔 Notificación del ESP32:", mensaje);
     console.log("📦 Body completo:", req.body);
