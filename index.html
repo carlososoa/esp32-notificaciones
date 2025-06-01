@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notificaciones ESP32</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Notificaciones en Tiempo Real</h1>
+    <div id="notificaciones"></div>
+
+    <script>
+        const socket = io();
+
+        socket.on('nueva-notificacion', (data) => {
+            const div = document.getElementById('notificaciones');
+            const p = document.createElement('p');
+            p.textContent = "🟢 Notificación recibida: " + data.mensaje;
+            div.appendChild(p);
+        });
+    </script>
+</body>
+</html>
